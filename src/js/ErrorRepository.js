@@ -21,14 +21,10 @@ export default class ErrorRepository {
    * @return {string} text of the value by code key
    */
   translate(code) {
-    if (!isNaN(code) && Number.isInteger) {
-      if (this.errors.has(code)) {
-        return this.errors.get(code);
-      } else {
-      throw new Error('Unknown error');
-    }
-    } else {
+    if (!Number.isInteger(code)) {
       throw new Error('Error code should be and integer');
+    } else {
+      return this.errors.has(code) ? this.errors.get(code) : 'Unknown error';
     }
   }
 }
